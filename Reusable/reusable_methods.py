@@ -1,4 +1,5 @@
 from xml.dom import minidom
+from datetime import datetime
 
 
 
@@ -12,54 +13,41 @@ class ReusableTest:
         data = my_doc.getElementsByTagName(node_name)[0]
         return data.firstChild.data
 
-    '''
+    @classmethod
+    def initial_html(cls, html_file):
 
-    @staticmethod
-    def generate_html_report(statustest):
+        html_file.write('<html style="background-color:powderblue;">')
+        html_file.write('<body padding-top: "100px";>')
+        html_file.write('<h1 align="center">Test Automation Report</h1>')
+        html_file.write('<p align="center">Date and Time :' + str(datetime.now()) + '</p>')
+        html_file.write('<table align="center" border="1" bordercolor = "#003300"')
+        html_file.write('</table>')
+        html_file.write('<tr style="background-color:#ffe6ff">' +
+                       '<th><center>Test Case ID</center></th>' +
+                       '<th><center>Test Case Description</center></th>' +
+                       '<th><center>Execution Status</center></th>' +
+                       '</tr>')
 
-        now = datetime.datetime.now()
-        MM = now.strftime("%Y_%m_%d_%H_%M_%S")
-        if statustest == "PASS":
-            f = open(DataTable.HTMLReportPath() + 'Smoke_008_' + MM + '_PASS.html', 'w')
-            message = """
-                <html lang="en">
-                <head>
-                <style>
-                body { background: #80d4ff; }
-                </style>
-                <meta charset="utf-8">
-                </head>
-                <body>""" \
-                      + '<table border = "1"><tr style = "background-color: #9999ff"><th>'"Test Name"'</th><th>Smoke Test 008</th></tr>' + '</table>' \
-                      + '<table border= "1"><tr style= "background-color: #C6EFCE"><td>SL No</td><td>Smoke Test Steps</td><td>Status</td></tr>' \
-                      + '<tr style="background-color:#ffffcc"><td>1</td><td>' + \
-                      'User can log in Successfully</td><td style="background-color:#00ff00">PASS</td></tr>' \
-                      + '<tr style="background-color:#ffffcc"><td>2</td><td>' + \
-                      'User Can add Past Order Successfully to Cart Page' + '</td><td style="background-color:#00ff00">PASS</td></tr>' \
-                      + '<tr style="background-color:#ffffcc"><td>3</td><td>' + \
-                      'Past Order added successfully to Cart Page' + '</td><td style="background-color:#00ff00">PASS</td></tr>' \
-                      + '<tr style="background-color:#ffffcc"><td>4</td><td>' + \
-                      'User Can Place Order Successfully with CASH-->' + ordernumber + '</td><td style="background-color:#00ff00">PASS</td></tr>' \
-                      + """</body></html>"""
-            f.write(message)
-            f.close()
-        else:
-            f = open(DataTable.HTMLReportPath() + 'Smoke_008_' + MM + '_FAIL.html', 'w')
-            message = """
-                <html lang="en"><head><style>body { background: #ffffff; }</style><meta charset="utf-8"></head>
-                <body><table border="1"><tr style="background-color:#ff5c33"><th>'"Smoke Test Name"'</th><th>Smoke Test 008 is RED</th></tr>'+'</table></body></html>"""
-            f.write(message)
-            f.close()
-'''
+    @classmethod
+    def final_html(cls, html_file):
 
-    def another_html(self):
+        html_file.write('</body>')
+        html_file.write('</html>')
+        html_file.close()
 
-         with open('mypage.html', 'w') as HtmlFile:
-            HtmlFile.write('<html>')
-            HtmlFile.write('<body>')
-            HtmlFile.write('<table>')
-            HtmlFile.write('</table>')
-            HtmlFile.write('</body>')
-            HtmlFile.write('</html>')
-            HtmlFile.close()
+    @classmethod
+    def when_test_is_pass(cls, html_string, test_id, test_description):
+        html_string.write('<tr style="background-color:#f2f2f2">'+
+       '<td><center>'+test_id+'</center></td>' +
+       '<td><center>'+test_description+'</center></td>' +
+       '<td style="background-color:#b3ffcc"><center>PASS</center></td>' +
+       '</tr>')
+
+    @classmethod
+    def when_test_is_fail(cls,html_string, test_id, test_description):
+        html_string.write('<tr style="background-color:#f2f2f2">' +
+        '<td><center>' + test_id + '</center></td>' +
+        '<td><center>' + test_description + '</center></td>' +
+       '<td style="background-color:#ffb3b3"><center>FAIL</center></td>' +
+       '</tr>')
 
