@@ -1,27 +1,38 @@
-# Python program to demonstrate  
-# use of class method and static method. 
-from datetime import date 
-  
-class Person: 
-    def __init__(self, name, age): 
-        self.name = name 
-        self.age = age 
-      
-    # a class method to create a Person object by birth year. 
-    @classmethod
-    def fromBirthYear(cls, name, year): 
-        return cls(name, date.today().year - year) 
-      
-    # a static method to check if a Person is adult or not. 
-    @staticmethod
-    def isAdult(age): 
-        return age > 18
-  
-person1 = Person('mayank', 21) 
-person2 = Person.fromBirthYear('mayank', 1996) 
-  
-print person1.age 
-print person2.age 
-  
-# print the result 
-print Person.isAdult(22) 
+
+
+import unittest
+from pathlib import Path
+from Reusable.reusable_methods import ReusableTest
+from Reusable import Driver
+from TestScenarioImplementation.HomeTestDef import HomeTestDef
+
+
+class SignInTest(unittest.TestCase):
+
+    def setUp(self):
+
+        Driver.Initialize()
+
+    def test_scenarios_execution(self):
+
+        pro_path = Path(__file__).parent
+        x = str(pro_path).split("TestScenarios")[0] + str("TestReport/")
+        with open(x + 'mypage.html', 'w') as html_file:
+
+            # Create initial test report
+            ReusableTest.initial_html(html_file)
+
+            # Starting execution
+            HomeTestDef.go_to_url(ReusableTest.read_xml("applicationurl"))  # Launch The Application
+            HomeTestDef.header_options_validation(self, html_file)  # Do Header section validation
+            HomeTestDef.footer_options_validation(self, html_file)  # Do Footer section validation
+
+            # Final report
+            ReusableTest.final_html(html_file)
+
+    def tearDown(self):
+        Driver.close_driver()
+
+
+if __name__ == '__main__':
+    unittest.main()
