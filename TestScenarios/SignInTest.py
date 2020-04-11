@@ -4,10 +4,10 @@ import unittest
 from pathlib import Path
 from Reusable.reusable_methods import ReusableTest
 from Reusable import Driver
-from TestScenarioImplementation.HomeTestDef import HomeTestDef
+from TestScenarioImplementation.SignInTestDef import SignInTestDef
 
 
-class SignInTest(unittest.TestCase):
+class SignInTestClass(unittest.TestCase):
 
     def setUp(self):
 
@@ -17,15 +17,15 @@ class SignInTest(unittest.TestCase):
 
         pro_path = Path(__file__).parent
         x = str(pro_path).split("TestScenarios")[0] + str("TestReport/")
-        with open(x + 'mypage.html', 'w') as html_file:
+        with open(x + 'SignInTestScenario.html', 'w') as html_file:
 
             # Create initial test report
-            ReusableTest.initial_html(html_file)
+            ReusableTest.initial_html(html_file, "Sign In Test Scenario")
 
             # Starting execution
-            HomeTestDef.go_to_url(ReusableTest.read_xml("applicationurl"))  # Launch The Application
-            HomeTestDef.header_options_validation(self, html_file)  # Do Header section validation
-            HomeTestDef.footer_options_validation(self, html_file)  # Do Footer section validation
+            SignInTestDef.go_to_url(ReusableTest.read_xml("applicationurl"))  # Launch The Application
+            SignInTestDef.sign_in_header(self, html_file)  # Do Header section validation
+            SignInTestDef.sign_in_body(self, html_file)  # Do negative sign in  section validation
 
             # Final report
             ReusableTest.final_html(html_file)

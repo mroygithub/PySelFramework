@@ -7,8 +7,7 @@ from Reusable import Driver
 from TestScenarioImplementation.HomeTestDef import HomeTestDef
 
 
-class HomeTest(unittest.TestCase):
-
+class HomeTestClass(unittest.TestCase):
 
     def setUp(self):
 
@@ -18,10 +17,10 @@ class HomeTest(unittest.TestCase):
 
         pro_path = Path(__file__).parent
         x = str(pro_path).split("TestScenarios")[0] + str("TestReport/")
-        with open(x + 'mypage.html', 'w') as html_file:
+        with open(x + 'HomeTestScenario.html', 'w') as html_file:
 
             # Create initial test report
-            ReusableTest.initial_html(html_file)
+            ReusableTest.initial_html(html_file, "Home Test Scenarios")
 
             # Starting execution
             HomeTestDef.go_to_url(ReusableTest.read_xml("applicationurl"))  # Launch The Application

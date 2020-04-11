@@ -14,11 +14,11 @@ class ReusableTest:
         return data.firstChild.data
 
     @classmethod
-    def initial_html(cls, html_file):
+    def initial_html(cls, html_file, title):
 
         html_file.write('<html style="background-color:powderblue;">')
         html_file.write('<body padding-top: "100px";>')
-        html_file.write('<h1 align="center">Test Automation Report</h1>')
+        html_file.write('<h1 align="center">Test Automation Report: :'+title+'</h1>')
         html_file.write('<p align="center">Date and Time :' + str(datetime.now()) + '</p>')
         html_file.write('<table align="center" border="1" bordercolor = "#003300"')
         html_file.write('</table>')

@@ -10,3 +10,9 @@ class HomePage:
     def loginLink():
         return "//a[@class='navbar-brand sign-in']"
 
+    @staticmethod
+    def training_option():
+        return "// h4[text() = 'Training Options']"
+
+
+
