@@ -1,6 +1,6 @@
 <testdata>
         <applicationurl>https://www.webucator.com</applicationurl>
-        <chrome_path>/Users/mithunroy/Downloads/chromedriver</chrome_path>
+        <chrome_path>/Users/mkroy/Downloads/chromedriver</chrome_path>
         <applicationtesturl>https://www.webucator.com</applicationtesturl>
         <email>mithunroy.ee@gmail.com</email>
 </testdata>
